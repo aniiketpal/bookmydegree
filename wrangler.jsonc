@@ -10,8 +10,10 @@
     "not_found_handling": "404-page"
   },
   "vars": {
-    "MAIL_TO": "info@bookmydegree.in",
-    "MAIL_FROM": "BookMyDegree <onboarding@resend.dev>"
+    "SMTP_HOST": "smtp.hostinger.com",
+    "SMTP_PORT": "465",
+    "SMTP_USER": "info@bookmydegree.in",
+    "MAIL_TO": "info@bookmydegree.in"
   },
   "observability": {
     "enabled": true

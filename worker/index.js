@@ -1,13 +1,17 @@
 /**
  * Cloudflare Worker entry for BookMyDegree.
  *
- * - POST /api/inquire  accepts both forms, emails the submission to the
- *                      business inbox through Resend, returns JSON.
+ * - POST /api/inquire  accepts both forms and emails the submission straight to
+ *                      the Hostinger mailbox over SMTP. No third-party email
+ *                      provider is involved: the Worker authenticates to your
+ *                      own mail server and nothing else stores the data.
  * - everything else    is served from the built static site (ASSETS).
  *
- * Secrets:  RESEND_API_KEY            (wrangler secret put RESEND_API_KEY)
- * Vars:     MAIL_TO, MAIL_FROM        (wrangler.jsonc)
+ * Vars (wrangler.jsonc): SMTP_HOST, SMTP_PORT, SMTP_USER, MAIL_TO
+ * Secret:                SMTP_PASS   (wrangler secret put SMTP_PASS)
  */
+
+import { sendMail } from './mail.js';
 
 const MAX_BODY_BYTES = 8 * 1024;
 
@@ -124,12 +128,6 @@ async function handleInquiry(request, env) {
   if (digits(phone).length < 7) return json(400, { error: 'invalid_phone' });
   if (email && !looksLikeEmail(email)) return json(400, { error: 'invalid_email' });
 
-  const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error('inquiry: RESEND_API_KEY is not configured');
-    return json(503, { error: 'mail_not_configured' });
-  }
-
   const rows = [
     ['Name', name],
     ['Phone / WhatsApp', phone],
@@ -145,26 +143,20 @@ async function handleInquiry(request, env) {
 
   const text = `${heading}\n\n${rows.map(([label, value]) => `${label}: ${value}`).join('\n')}\n`;
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${apiKey}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: env.MAIL_FROM || 'BookMyDegree <onboarding@resend.dev>',
-      to: [env.MAIL_TO || 'info@bookmydegree.in'],
+  try {
+    await sendMail(env, {
+      to: env.MAIL_TO || 'info@bookmydegree.in',
       subject: `${heading} — ${name}`,
-      ...(email ? { reply_to: [email] } : {}),
-      text,
       html: renderHtml(heading, rows),
-    }),
-  });
-
-  if (!res.ok) {
-    const detail = await res.text().catch(() => '');
-    console.error('inquiry: Resend rejected the message', res.status, detail.slice(0, 400));
-    return json(502, { error: 'delivery_failed' });
+      text,
+      replyTo: email || undefined,
+    });
+  } catch (error) {
+    console.error('inquiry: SMTP send failed —', String(error).slice(0, 500));
+    const notConfigured = /credentials are not configured/.test(String(error));
+    return json(notConfigured ? 503 : 502, {
+      error: notConfigured ? 'mail_not_configured' : 'delivery_failed',
+    });
   }
 
   return json(200, { ok: true });
