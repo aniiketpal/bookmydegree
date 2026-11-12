@@ -27,21 +27,6 @@ const wrap76 = (value) => (value.match(/.{1,76}/g) || []).join('\r\n');
 const headerValue = (value) =>
   /^[\x20-\x7e]*$/.test(value) ? value : `=?UTF-8?B?${base64(value)}?=`;
 
-export async function probeTargets(targets) {
-  const results = [];
-  for (const [hostname, port, tls] of targets) {
-    try {
-      const socket = connect({ hostname, port }, { secureTransport: tls ? 'on' : 'off' });
-      await socket.opened;
-      results.push(`${hostname}:${port}${tls ? ' tls' : ''} -> open`);
-      socket.close();
-    } catch (error) {
-      results.push(`${hostname}:${port}${tls ? ' tls' : ''} -> ${error && error.message}`);
-    }
-  }
-  return results;
-}
-
 function openConnection(host, port) {
   const socket = connect({ hostname: host, port }, { secureTransport: 'on' });
   const reader = socket.readable.getReader();
