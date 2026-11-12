@@ -150,7 +150,8 @@ const PHONE_NUMBER = '+919211657613';
        Resolves false on any failure so the thank-you can still appear. */
     async function postRequest(payload: Record<string, string>) {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 9000);
+      // Email handoff on the Worker can take ~20s; give it room before giving up.
+      const timer = setTimeout(() => controller.abort(), 45000);
       try {
         const res = await fetch('/api/inquire', {
           method: 'POST',

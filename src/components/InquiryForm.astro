@@ -169,7 +169,8 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
        Resolves false on any failure so the thank-you can still appear. */
     async function postInquiry(payload) {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 9000);
+      // Email handoff on the Worker can take ~20s; give it room before giving up.
+      const timer = setTimeout(() => controller.abort(), 45000);
       try {
         const res = await fetch('/api/inquire', {
           method: 'POST',
