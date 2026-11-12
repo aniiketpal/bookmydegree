@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bookmydegree",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-30",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    "MAIL_TO": "info@bookmydegree.in",
+    "MAIL_FROM": "BookMyDegree <onboarding@resend.dev>"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

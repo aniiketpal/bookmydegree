@@ -1,0 +1,416 @@
+---
+/**
+ * InquiryForm — lean inquiry form.
+ * Client-side validation, then an on-screen thank-you with two ways forward:
+ * WhatsApp (enriched with what they submitted) or a direct call.
+ *
+ * Replace the two placeholder numbers below when the real ones are ready.
+ */
+const WHATSAPP_NUMBER = '919211657613'; // digits only, with country code
+const PHONE_NUMBER = '+919211657613';
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  'Hi, I found BookMyDegree and would like to inquire about a program and book a call.'
+);
+---
+
+<form
+  class="inquiry-form"
+  id="inquiry-form"
+  novalidate
+  aria-label="Inquire and book a call"
+  data-whatsapp={WHATSAPP_NUMBER}
+  data-phone={PHONE_NUMBER}
+>
+  <div class="field">
+    <label for="inquire-name">Your name</label>
+    <input
+      id="inquire-name"
+      name="name"
+      type="text"
+      autocomplete="name"
+      placeholder="Rohan Mehta"
+      required
+      aria-required="true"
+    />
+    <span class="err" id="err-name" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="inquire-phone">Phone or WhatsApp number</label>
+    <input
+      id="inquire-phone"
+      name="phone"
+      type="tel"
+      autocomplete="tel"
+      inputmode="tel"
+      placeholder="98XXXXXXXX"
+      required
+      aria-required="true"
+    />
+    <span class="err" id="err-phone" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="inquire-email">Email <span class="opt">optional</span></label>
+    <input
+      id="inquire-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      inputmode="email"
+      placeholder="you@example.com"
+    />
+    <span class="err" id="err-email" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="inquire-program">Program of interest</label>
+    <select id="inquire-program" name="program">
+      <option value="" disabled selected>Select a program, or “Not sure yet”</option>
+      <option value="ug-3yr">Undergraduate — 3 year program</option>
+      <option value="ug-4yr">Undergraduate — 4 year program</option>
+      <option value="pg">Postgraduate / Master’s</option>
+      <option value="diploma">Diploma / certificate</option>
+      <option value="not-sure">Not sure yet — need guidance</option>
+    </select>
+    <span class="err" id="err-program" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="inquire-message">Message <span class="opt">optional</span></label>
+    <textarea
+      id="inquire-message"
+      name="message"
+      rows="3"
+      placeholder="Which level, any preferred field, your timeline."
+    ></textarea>
+  </div>
+
+  <button class="btn btn-primary submit" type="submit">
+    Inquire and book a call
+    <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <p class="form-note">
+    We reply to help you pick the right program. Enrollment happens by phone,
+    WhatsApp, or in person — we guide the selection and paperwork.
+  </p>
+</form>
+
+<div class="thankyou" id="inquiry-thankyou" hidden aria-live="polite" role="status">
+  <div class="thankyou-icon" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M7.5 12.4l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h3>Thanks — your inquiry is in.</h3>
+  <p class="thankyou-lead">
+    We'll be in touch on the number you shared. In the meantime, pick whichever
+    is easier:
+  </p>
+
+  <p class="mail-note" id="inquiry-mail-note" hidden>
+    We couldn't email this to our team automatically. Continue on WhatsApp so
+    nothing is missed.
+  </p>
+
+  <div class="thankyou-actions">
+    <a
+      class="btn btn-primary"
+      id="thankyou-wa"
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.84c0 1.94.56 3.75 1.53 5.28L2 22l5.02-1.68a9.8 9.8 0 0 0 5.02 1.38h.01c5.44 0 9.84-4.4 9.84-9.84S17.48 2 12.04 2Zm5.76 13.9c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.02.15-3.44-.9-2.9-1.28-4.7-4.3-4.84-4.5-.14-.2-1.13-1.5-1.13-2.87 0-1.36.71-2.03.96-2.31.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.23.55.79 1.9.86 2.04.07.14.11.3.02.48-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.14-.29.29-.12.57.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.32 1.44.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.23.64-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.7-.17 1.38Z" />
+      </svg>
+      Continue on WhatsApp
+    </a>
+
+    <a class="btn btn-ghost dark-ghost" id="thankyou-call" href={`tel:${PHONE_NUMBER}`}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6.6 3.5h2.2l1.6 4-1.9 1.4a12.5 12.5 0 0 0 6 6l1.4-1.9 4 1.6v2.2a2.1 2.1 0 0 1-2.3 2.1A16.8 16.8 0 0 1 4.5 5.8 2.1 2.1 0 0 1 6.6 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      Call now
+    </a>
+  </div>
+
+  <p class="thankyou-back">
+    Or keep browsing — <a href="#programs">see programs</a> and
+    <a href="#guidance">career guidance</a>.
+  </p>
+</div>
+
+<script>
+  (function () {
+    const form = document.getElementById('inquiry-form');
+    const thankyou = document.getElementById('inquiry-thankyou');
+    if (!form || !thankyou) return;
+
+    const WHATSAPP_NUMBER = form.getAttribute('data-whatsapp') || '';
+
+    const setError = (id, msg) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = msg;
+    };
+
+    const clearErrors = () =>
+      ['err-name', 'err-phone', 'err-program'].forEach((id) => setError(id, ''));
+
+    const validPhone = (v) => v.replace(/[\s\-()+]/g, '').length >= 7;
+    const validEmail = (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+    /* Posts to the Worker, which emails the submission to the team inbox.
+       Resolves false on any failure so the thank-you can still appear. */
+    async function postInquiry(payload) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 9000);
+      try {
+        const res = await fetch('/api/inquire', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+        return res.ok;
+      } catch {
+        return false;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const phone = form.querySelector('[name="phone"]').value.trim();
+      const program = form.querySelector('[name="program"]').value;
+      const email = form.querySelector('[name="email"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+
+      let ok = true;
+
+      if (name.length < 2) {
+        setError('err-name', 'Please add your name.');
+        ok = false;
+      }
+      if (!validPhone(phone)) {
+        setError('err-phone', 'Please add a valid phone or WhatsApp number.');
+        ok = false;
+      }
+      if (!program) {
+        setError('err-program', 'Pick a program, or choose “Not sure yet”.');
+        ok = false;
+      }
+      if (!validEmail(email)) {
+        setError('err-email', 'That email does not look right.');
+        ok = false;
+      }
+      if (!ok) {
+        form.querySelector('input, select')?.focus();
+        return;
+      }
+
+      const programLabel =
+        form.querySelector('[name="program"] option:checked')?.textContent?.trim() ||
+        'a program I need guidance on';
+
+      const prefill = encodeURIComponent(
+        `Hi, I'm ${name}. I'm interested in: ${programLabel}.` +
+          (message ? ` ${message}` : '')
+      );
+
+      const wa = document.getElementById('thankyou-wa');
+      if (wa) wa.setAttribute('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${prefill}`);
+
+      const submitBtn = form.querySelector('.submit');
+      const mailNote = document.getElementById('inquiry-mail-note');
+      if (submitBtn) submitBtn.setAttribute('aria-busy', 'true');
+
+      const delivered = await postInquiry({
+        formType: 'program-inquiry',
+        name,
+        phone,
+        email,
+        program: programLabel,
+        message,
+        page: location.pathname,
+      });
+
+      if (submitBtn) submitBtn.removeAttribute('aria-busy');
+      if (mailNote) mailNote.hidden = delivered;
+
+      form.hidden = true;
+      thankyou.hidden = false;
+      thankyou.focus?.();
+      thankyou.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<style>
+  .inquiry-form {
+    display: grid;
+    gap: 16px;
+  }
+
+  .field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .field label {
+    font-size: 0.845rem;
+    font-weight: 600;
+    letter-spacing: -0.002em;
+    color: var(--text-strong);
+  }
+
+  .opt {
+    font-weight: 400;
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    margin-left: 4px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(28, 23, 16, 0.2);
+    background: var(--paper);
+    color: var(--text-strong);
+    font-size: 0.955rem;
+    transition: border-color var(--fast), box-shadow var(--fast), background var(--fast);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 84px;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--text-faint);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(141, 95, 30, 0.16);
+  }
+
+  .err {
+    color: #a8342a;
+    font-size: 0.815rem;
+    line-height: 1.3;
+    min-height: 0;
+  }
+
+  .err:empty {
+    display: none;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .form-note {
+    font-size: 0.845rem;
+    line-height: 1.55;
+    color: var(--text-body);
+    margin-top: 2px;
+  }
+
+  /* ---------- Thank-you ---------- */
+  .thankyou {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+
+  .thankyou-icon {
+    color: var(--gold-deep);
+  }
+
+  .thankyou h3 {
+    color: var(--text-strong);
+    font-size: 1.32rem;
+  }
+
+  .thankyou-lead {
+    font-size: 0.945rem;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .mail-note {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #8a3a2a;
+  }
+
+  .thankyou-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .thankyou-actions .btn {
+    width: 100%;
+  }
+
+  .dark-ghost {
+    border-color: rgba(18, 22, 42, 0.22);
+    color: var(--text-strong);
+  }
+
+  .dark-ghost:hover {
+    background: rgba(18, 22, 42, 0.06);
+    border-color: rgba(18, 22, 42, 0.34);
+  }
+
+  .thankyou-back {
+    font-size: 0.875rem;
+    color: var(--text-body);
+    margin-top: 4px;
+  }
+
+  .thankyou-back a {
+    color: var(--text-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(168, 129, 58, 0.5);
+  }
+
+  .thankyou-back a:hover {
+    color: var(--gold-deep);
+  }
+
+  @media (min-width: 520px) {
+    .thankyou-actions {
+      flex-direction: row;
+    }
+
+    .thankyou-actions .btn {
+      width: auto;
+      flex: 1;
+    }
+  }
+</style>

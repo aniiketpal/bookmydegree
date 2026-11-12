@@ -1,0 +1,74 @@
+---
+/**
+ * BookMyDegree logo.
+ * The mark is pure geometry: two mirrored page shapes with a narrow slit
+ * that opens into an arch — a book that is also a doorway.
+ * The wordmark is live text so it stays crisp and editable.
+ */
+interface Props {
+  desc?: string;
+}
+
+const { desc } = Astro.props;
+
+const page =
+  'M16 12H58.5V34C58.5 43 51 50 44 50V96C32 101 18 99 8 88V20Q8 12 16 12Z';
+---
+
+<span class="logo">
+  <svg
+    class="logo-mark"
+    viewBox="0 0 120 112"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d={page} />
+    <path d={page} transform="translate(120 0) scale(-1 1)" />
+  </svg>
+
+  <span class="logo-text">
+    <span class="logo-word">BookMyDegree</span>
+    {desc && <span class="logo-desc">{desc}</span>}
+  </span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    line-height: 1;
+    color: inherit;
+  }
+
+  .logo-mark {
+    width: 1.75em;
+    height: auto;
+    flex: 0 0 auto;
+    fill: currentColor;
+  }
+
+  .logo-text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .logo-word {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: inherit;
+  }
+
+  .logo-desc {
+    font-size: 0.625rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    opacity: 0.62;
+    white-space: nowrap;
+  }
+</style>

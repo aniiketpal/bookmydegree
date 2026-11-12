@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# cloudflare
+.wrangler/
+
+# local screenshots
+screenshot-*.png
+*-prev.jpg
+
+# secrets — never commit
+.dev.vars
+.env
+.env.*
+!.env.example

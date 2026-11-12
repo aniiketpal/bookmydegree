@@ -1,0 +1,446 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+
+import heroDesk from '../assets/photos/study-desk.jpg';
+import chipBooks from '../assets/photos/chip-books.jpg';
+import chipNotes from '../assets/photos/chip-notes.jpg';
+import chipPlan from '../assets/photos/chip-plan.jpg';
+import chipHand from '../assets/photos/chip-hand.jpg';
+import counsellingNotes from '../assets/photos/chip-writing.jpg';
+
+import programs from '../data/programs.json';
+import sessions from '../data/sessions.json';
+
+const title = 'BookMyDegree — Distance Degree Guidance in India';
+const description =
+  'BookMyDegree helps students in India choose the right open distance learning program, handle the paperwork, and submit it to the right institution. Free counselling call.';
+
+const chipImages: Record<string, any> = {
+  books: chipBooks,
+  notes: chipNotes,
+  plan: chipPlan,
+  hand: chipHand,
+};
+
+interface Token {
+  text?: string;
+  img?: 'books' | 'notes' | 'plan' | 'hand';
+  variant?: string;
+}
+
+// Chips sit inside the sentence at uneven intervals, not stacked at the end.
+const statement: Token[] = [
+  { text: 'Not' },
+  { text: 'sure' },
+  { text: 'what' },
+  { text: 'comes' },
+  { text: 'after' },
+  { text: '12th?' },
+  { img: 'books', variant: 'chip--wide' },
+  { text: 'We' },
+  { text: 'help' },
+  { text: 'you' },
+  { text: 'choose' },
+  { text: 'the' },
+  { text: 'right' },
+  { img: 'notes', variant: 'chip--square' },
+  { text: 'degree,' },
+  { text: 'plan' },
+  { text: 'the' },
+  { text: 'next' },
+  { text: 'few' },
+  { text: 'years' },
+  { img: 'plan', variant: 'chip--tall' },
+  { text: 'and' },
+  { text: 'study' },
+  { text: 'from' },
+  { text: 'anywhere' },
+  { text: 'in' },
+  { text: 'India.' },
+  { img: 'hand' },
+];
+
+const arrow = `<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+
+<BaseLayout {title} {description}>
+  <main id="main">
+    <!-- ================= HERO (pinned, curtain reveal) ================= -->
+    <div class="hero-wrap" data-hero-wrap>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media">
+          <Image
+            src={heroDesk}
+            alt="Someone writing a plan in a notebook beside a laptop on a bright desk"
+            width={1800}
+            format="webp"
+            quality={76}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        <div class="container hero-inner">
+          <div>
+            <p class="eyebrow">Open distance learning, across India</p>
+
+            <h1 id="hero-title">
+              <span class="line-mask">
+                <span class="hero-line" data-line="1">The right degree.</span>
+              </span>
+              <span class="line-mask">
+                <span class="hero-line" data-line="2">Minus the <em>guesswork</em>.</span>
+              </span>
+            </h1>
+
+            <p class="hero-sub">
+              We help you find a genuine open distance learning program —
+              undergraduate, postgraduate or diploma — and handle the
+              paperwork that comes with getting in.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#inquire">
+                Inquire and book a call
+                <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a class="btn btn-ghost" href="#programs">Browse programs</a>
+            </div>
+          </div>
+
+          <aside class="hero-aside">
+            <p class="hero-aside-label">What we actually do</p>
+            <p>
+              We help you choose a recognised program, prepare the application
+              and submit it to the institution. What happens after that is
+              between you and them.
+            </p>
+            <ul class="hero-facts">
+              <li><span class="n">3–4</span><span class="t">years, typical program length</span></li>
+              <li><span class="n">1:1</span><span class="t">guidance call, no charge</span></li>
+              <li><span class="n">0</span><span class="t">degrees awarded by us</span></li>
+            </ul>
+          </aside>
+        </div>
+
+        <span class="hero-scroll">Scroll</span>
+      </section>
+    </div>
+
+    <!-- ================= STATEMENT ================= -->
+    <div class="curtain">
+      <section class="statement">
+        <div class="container">
+          <p class="statement-text" data-reveal-group>
+            {statement.map((tok, i) =>
+              tok.img ? (
+                <Image
+                  src={chipImages[tok.img]}
+                  alt=""
+                  class={`chip ${tok.variant ?? ''}`}
+                  width={320}
+                  format="webp"
+                  quality={70}
+                  loading="lazy"
+                  style={`--i:${i}`}
+                />
+              ) : (
+                <span class="w" style={`--i:${i}`}>{tok.text}</span>
+              )
+            )}
+          </p>
+
+          <p class="statement-body reveal">
+            Choosing a degree is a big decision. We look at your marks,
+            interests and what you want to be able to do, then match you with a
+            recognised distance-learning program you can complete while you
+            work or prepare for exams.
+          </p>
+
+          <div class="statement-cta reveal d1">
+            <a class="pill pill--outline" href="/counselling">
+              How counselling works
+              <span class="pill-arrow">
+                <Fragment set:html={arrow} />
+                <Fragment set:html={arrow} />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CREDIBILITY ================= -->
+      <section class="credited">
+        <div class="container">
+          <div class="credited-grid">
+            <div class="credited-item reveal">
+              <span class="credited-kicker">Not a degree mill</span>
+              <span class="credited-text">We help you choose. The degree is awarded by the institution.</span>
+            </div>
+            <div class="credited-item reveal d1">
+              <span class="credited-kicker">Real, listed programs</span>
+              <span class="credited-text">Open distance learning with a proper 3- or 4-year path.</span>
+            </div>
+            <div class="credited-item reveal d2">
+              <span class="credited-kicker">No pushy upsell</span>
+              <span class="credited-text">One goal: a short call that actually helps you decide.</span>
+            </div>
+            <div class="credited-item reveal d3">
+              <span class="credited-kicker">Plain talk</span>
+              <span class="credited-text">If a program isn’t right for you, we say so.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= PROGRAMS ================= -->
+    <section id="programs" aria-labelledby="programs-title">
+      <div class="container">
+        <div class="head-row reveal">
+          <div>
+            <p class="eyebrow">Programs</p>
+            <h2 id="programs-title">Where most students start</h2>
+          </div>
+          <a class="link-arrow" href="#inquire">
+            Not sure? Ask first
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <ul class="num-list num-list--feature" role="list">
+          {programs.map((p) => (
+            <li class="reveal">
+              <a class="program-row" href={`/programs/${p.slug}`}>
+                <span class="n">{p.num}</span>
+                <div>
+                  <h3 class="t">{p.title}</h3>
+                  <span class="s">{p.kicker}. {p.blurb}</span>
+                </div>
+                <span class="program-row-arrow" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p class="section-note reveal">
+          Each is a program you complete with the institution — we help you get
+          there and handle the paperwork along the way.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= PHOTO BAND ================= -->
+    <section class="band">
+      <div class="band-inner">
+        <div class="reveal">
+          <p class="band-quote">
+            Guidance is what we do. The degree is <em>awarded</em> by the
+            institution.
+          </p>
+          <p class="band-sub">
+            We help you choose, prepare the application, and submit it.
+            Admission and the degree itself follow the institution’s own
+            process — and we say that plainly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COUNSELLING TEASER ================= -->
+    <section id="counselling" aria-labelledby="counselling-title">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Career counselling</p>
+          <h2 id="counselling-title">Not sure what fits? Start there.</h2>
+          <p>
+            A lot of students come to us without a program in mind — just a
+            question: what should I actually do next? That is a different
+            conversation, and it has its own page.
+          </p>
+
+          <ol class="num-list">
+          <li>
+            <span class="n">i</span>
+            <div>
+              <span class="t">A 30-minute call, at your pace</span>
+              <span class="s">Where you are, what you’ve studied, and what you’d like to be able to do.</span>
+            </div>
+          </li>
+          <li>
+            <span class="n">ii</span>
+            <div>
+              <span class="t">A shortlist that fits your situation</span>
+              <span class="s">Undergraduate, postgraduate or diploma — and whether 3 or 4 years is realistic.</span>
+            </div>
+          </li>
+          <li>
+            <span class="n">iii</span>
+            <div>
+              <span class="t">Written next steps, not a sales pitch</span>
+              <span class="s">You leave knowing what to do next even if you never speak to us again.</span>
+            </div>
+          </li>
+          </ol>
+
+          <a class="btn btn-primary" href="/counselling">
+            See how counselling works
+            <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <figure class="split-figure reveal d2">
+          <Image
+            src={counsellingNotes}
+            alt="A person writing notes in a notebook with a pen"
+            width={1100}
+            format="webp"
+            quality={74}
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= SESSIONS RAIL ================= -->
+    <section id="sessions" class="ground-gold" aria-labelledby="sessions-title">
+      <div class="container">
+        <div class="rail-head reveal">
+          <div>
+            <p class="eyebrow">Counselling &amp; sessions</p>
+            <h2 id="sessions-title">Sit in on a session before you decide.</h2>
+          </div>
+          <a class="pill pill--ink" href="/counselling">
+            All sessions
+            <span class="pill-arrow">
+              <Fragment set:html={arrow} />
+              <Fragment set:html={arrow} />
+            </span>
+          </a>
+        </div>
+
+        <div class="rail" data-rail>
+          <div class="rail-viewport" data-rail-viewport>
+            <div class="rail-track">
+              {sessions.map((s, i) => (
+                <article class="rail-card">
+                  <div class="rail-poster">
+                    <img
+                      class="rail-poster-img"
+                      src={s.image}
+                      alt={s.alt}
+                      width="800"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="rail-poster-veil" aria-hidden="true"></span>
+                    <span class="rail-poster-mark">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="rail-poster-title">{s.title}</span>
+                    <span class="rail-tag">{s.category}</span>
+                  </div>
+                  <div class="rail-meta">
+                    <span>{s.format}</span>
+                    <span>{s.length}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="rail-foot">
+            <div class="rail-progress" aria-hidden="true">
+              <span class="rail-progress-fill" data-rail-fill></span>
+            </div>
+            <div class="rail-btns">
+              <button class="rail-btn" type="button" data-rail-prev aria-label="Previous sessions">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="rail-btn" type="button" data-rail-next aria-label="Next sessions">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="section-note reveal">
+          Topics we run regularly. Times are confirmed on the call — we don’t
+          publish a calendar we can’t keep.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= INQUIRE ================= -->
+    <section class="inquire-section" id="inquire" aria-labelledby="inquire-title">
+      <div class="container inquire-grid">
+        <div class="inquire-copy reveal">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="inquire-title">Inquire and book a call</h2>
+
+          <p>
+            Tell us where you are and what you’re looking for. We’ll reply and
+            set up a short call, or a WhatsApp chat, to help you work out the
+            right next step.
+          </p>
+
+          <ul class="num-list">
+            <li>
+              <span class="n">i</span>
+              <div>
+                <span class="t">Short and straightforward</span>
+                <span class="s">A few details is enough to start.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">ii</span>
+              <div>
+                <span class="t">Two ways to continue</span>
+                <span class="s">After you submit, continue on WhatsApp or call directly.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">iii</span>
+              <div>
+                <span class="t">Real people on the call</span>
+                <span class="s">You speak to someone who knows the programs, not a script.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-panel reveal d2">
+          <InquiryForm />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta">
+      <div class="container final-inner reveal">
+        <p class="eyebrow eyebrow--center">Ready when you are</p>
+        <h2>Let’s work out the right next step.</h2>
+        <p>Book a call, or drop into WhatsApp — whichever is easier for you.</p>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#inquire">Book a free call</a>
+          <a class="btn btn-ghost" href="/counselling">Career counselling instead</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

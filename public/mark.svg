@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 112" role="img" aria-label="BookMyDegree symbol">
+  <g fill="#1e1e1b">
+    <path d="M16 12H58.5V34C58.5 43 51 50 44 50V96C32 101 18 99 8 88V20Q8 12 16 12Z" />
+    <path
+      d="M16 12H58.5V34C58.5 43 51 50 44 50V96C32 101 18 99 8 88V20Q8 12 16 12Z"
+      transform="translate(120 0) scale(-1 1)"
+    />
+  </g>
+</svg>

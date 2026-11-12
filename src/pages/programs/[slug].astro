@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InquiryForm from '../../components/InquiryForm.astro';
+import programs from '../../data/programs.json';
+
+export function getStaticPaths() {
+  return programs.map((p) => ({
+    params: { slug: p.slug },
+    props: { program: p },
+  }));
+}
+
+const { program } = Astro.props;
+const others = programs.filter((p) => p.slug !== program.slug);
+
+const title = `${program.title} — distance and online programs | BookMyDegree`;
+const description = program.lead;
+
+const arrow = `<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+
+<BaseLayout {title} {description}>
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Programs · {program.num}</p>
+        <h1>{program.title}</h1>
+        <p class="page-lead">{program.lead}</p>
+
+        <div class="page-actions">
+          <a class="pill pill--gold" href="#inquire">
+            Inquire about {program.label}
+            <span class="pill-arrow">
+              <Fragment set:html={arrow} />
+              <Fragment set:html={arrow} />
+            </span>
+          </a>
+          <a class="btn btn-outline" href="/#programs">See all programs</a>
+        </div>
+
+        <ul class="page-facts" role="list">
+          <li><span class="n">{program.note}</span><span class="t">typical program length</span></li>
+          <li><span class="n">Distance</span><span class="t">study without a campus</span></li>
+          <li><span class="n">Free</span><span class="t">first conversation</span></li>
+          <li><span class="n">0</span><span class="t">degrees awarded by us</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= INTRO + COURSES ================= -->
+    <section class="ground-cream" aria-labelledby="courses-title">
+      <div class="container">
+        <div class="section-head section-head--dark reveal">
+          <p class="eyebrow">Courses</p>
+          <h2 id="courses-title">Routes students in India actually take</h2>
+          <p class="lead-dark">{program.intro}</p>
+        </div>
+
+        <ul class="course-list reveal" role="list">
+          {program.courses.map((c) => (
+            <li>
+              <div class="course-top">
+                <h3 class="course-name">{c.name}</h3>
+                <span class="course-duration">{c.duration}</span>
+              </div>
+              <p class="course-type">{c.type}</p>
+              <p class="course-fits">{c.fits}</p>
+            </li>
+          ))}
+        </ul>
+
+        <p class="section-note reveal">
+          Exact specialisations, eligibility and fees are set by each institution
+          and change between sessions. We confirm the current ones for the program
+          you are considering rather than publishing a list we cannot keep accurate.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= CAREERS ================= -->
+    <section aria-labelledby="careers-title">
+      <div class="container">
+        <div class="head-row reveal">
+          <div>
+            <p class="eyebrow">Where it leads</p>
+            <h2 id="careers-title">Career options this usually opens</h2>
+          </div>
+          <a class="link-arrow" href="#inquire">
+            Ask about one
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <ol class="career-grid reveal" role="list">
+          {program.careers.map((c, i) => (
+            <li>
+              <span class="career-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="career-role">{c.role}</h3>
+              <p class="career-detail">{c.detail}</p>
+            </li>
+          ))}
+        </ol>
+
+        <p class="section-note reveal">
+          These are directions, not promises. What you do alongside the degree —
+          projects, internships, exams, a portfolio — decides which of them is
+          realistic.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= HOW WE HELP ================= -->
+    <section class="ground-cream" aria-labelledby="help-title">
+      <div class="container">
+        <div class="section-head section-head--dark reveal">
+          <p class="eyebrow">How we help</p>
+          <h2 id="help-title">What we actually do for this</h2>
+        </div>
+
+        <ol class="help-list reveal" role="list">
+          {program.helps.map((h, i) => (
+            <li>
+              <span class="help-num">0{i + 1}</span>
+              <h3>{h.title}</h3>
+              <p>{h.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= INQUIRE ================= -->
+    <section class="inquire-section" id="inquire" aria-labelledby="inquire-title">
+      <div class="container inquire-grid">
+        <div class="inquire-copy reveal">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="inquire-title">Inquire about {program.label}</h2>
+
+          <p>
+            Tell us where you are and what you are looking for. We will reply and
+            set up a short call, or a WhatsApp chat, to work out which of these
+            routes actually fits your marks, your week and your plans.
+          </p>
+
+          <ul class="num-list">
+            <li>
+              <span class="n">i</span>
+              <div>
+                <span class="t">A shortlist, not a catalogue</span>
+                <span class="s">Two or three routes that fit, with the reasons they fit.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">ii</span>
+              <div>
+                <span class="t">The paperwork, handled</span>
+                <span class="s">Documents, application and submission — gathered once, correctly.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">iii</span>
+              <div>
+                <span class="t">No pressure either way</span>
+                <span class="s">If distance learning is the wrong route for you, we say so.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-panel reveal d2">
+          <InquiryForm />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <div class="reveal">
+          <p class="eyebrow">{program.label}</p>
+          <h2 id="faq-title">Questions worth asking first</h2>
+        </div>
+
+        <div class="pfaq-list reveal d1">
+          {program.faqs.map((f) => (
+            <details class="pfaq">
+              <summary>
+                {f.q}
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OTHER PROGRAMS ================= -->
+    <section class="ground-cream" aria-labelledby="others-title">
+      <div class="container">
+        <div class="section-head section-head--dark reveal">
+          <p class="eyebrow">Still deciding</p>
+          <h2 id="others-title">Other routes we advise on</h2>
+        </div>
+
+        <ul class="other-grid reveal" role="list">
+          {others.map((o) => (
+            <li>
+              <a class="other-card" href={`/programs/${o.slug}`}>
+                <span class="other-num">{o.num}</span>
+                <span class="other-label">{o.label}</span>
+                <span class="other-kicker">{o.kicker}</span>
+                <span class="other-arrow">
+                  <Fragment set:html={arrow} />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta">
+      <div class="container final-inner reveal">
+        <p class="eyebrow eyebrow--center">Ready when you are</p>
+        <h2>Not sure {program.label.toLowerCase()} is right?</h2>
+        <p>Start with the call. Thirty minutes usually settles it either way.</p>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#inquire">Book a free call</a>
+          <a class="btn btn-ghost" href="/counselling">Career counselling instead</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ---------- Inner page hero ---------- */
+  .page-hero {
+    position: relative;
+    padding-block: calc(var(--nav-h) + var(--nav-top) + clamp(56px, 7vw, 104px)) clamp(64px, 8vw, 104px);
+    overflow: hidden;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(50% 48% at 82% -6%, rgba(220, 179, 92, 0.14), transparent 64%),
+      radial-gradient(44% 40% at 4% 104%, rgba(80, 105, 200, 0.08), transparent 68%);
+    pointer-events: none;
+  }
+
+  .page-hero .container {
+    position: relative;
+  }
+
+  .page-hero h1 {
+    max-width: 22ch;
+    font-size: clamp(2.2rem, 4.6vw, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+
+  .page-lead {
+    max-width: 58ch;
+    margin-block-start: var(--s-5);
+    font-size: var(--text-md);
+    line-height: 1.64;
+    color: var(--text-body);
+  }
+
+  .page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-block-start: var(--s-6);
+  }
+
+  .page-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-7);
+    margin-block-start: var(--s-7);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .page-facts li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+  }
+
+  .page-facts .n {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-strong);
+  }
+
+  .page-facts .t {
+    font-size: var(--text-sm);
+    color: var(--text-body);
+  }
+
+  .section-head--dark p.lead-dark {
+    color: var(--text-body);
+    max-width: 64ch;
+    line-height: 1.6;
+  }
+
+  /* ---------- Course list ---------- */
+  .course-list {
+    list-style: none;
+    border-block-start: 1px solid var(--line-cream);
+    margin-block: var(--s-6) var(--s-4);
+  }
+
+  .course-list li {
+    padding-block: var(--s-5);
+    border-block-end: 1px solid var(--line-cream);
+  }
+
+  .course-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-2) var(--s-4);
+  }
+
+  .course-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--text-strong);
+  }
+
+  .course-duration {
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--gold-deep);
+    white-space: nowrap;
+  }
+
+  .course-type {
+    margin-block-start: 2px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-body);
+  }
+
+  .course-fits {
+    max-width: 68ch;
+    margin-block-start: var(--s-3);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* ---------- Careers ---------- */
+  .career-grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-5);
+    margin-block: var(--s-6);
+  }
+
+  @media (min-width: 780px) {
+    .career-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--s-6);
+    }
+  }
+
+  .career-grid li {
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .career-num {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--gold-deep);
+    margin-block-end: var(--s-2);
+  }
+
+  .career-role {
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-strong);
+  }
+
+  .career-detail {
+    margin-block-start: var(--s-2);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* ---------- How we help ---------- */
+  .help-list {
+    list-style: none;
+    display: grid;
+    gap: var(--s-5);
+    margin-block-start: var(--s-6);
+  }
+
+  @media (min-width: 860px) {
+    .help-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-6);
+    }
+  }
+
+  .help-list li {
+    padding-block-start: var(--s-4);
+    border-block-start: 1px solid var(--line-cream);
+  }
+
+  .help-num {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--gold-deep);
+    margin-block-end: var(--s-2);
+  }
+
+  .help-list h3 {
+    font-size: var(--text-md);
+    letter-spacing: -0.01em;
+    color: var(--text-strong);
+  }
+
+  .help-list p {
+    margin-block-start: var(--s-2);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap {
+    display: grid;
+    gap: clamp(32px, 4vw, 64px);
+  }
+
+  @media (min-width: 900px) {
+    .faq-wrap {
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+    }
+  }
+
+  .pfaq-list {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .pfaq {
+    border-block-end: 1px solid var(--line);
+  }
+
+  .pfaq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-block: var(--s-5);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: -0.008em;
+    color: var(--text-strong);
+  }
+
+  .pfaq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pfaq summary svg {
+    flex: 0 0 auto;
+    color: var(--gold-deep);
+    transition: transform 300ms var(--expo);
+  }
+
+  .pfaq[open] summary svg {
+    transform: rotate(135deg);
+  }
+
+  .pfaq p {
+    max-width: 62ch;
+    padding-block-end: var(--s-5);
+    font-size: var(--text-base);
+    line-height: 1.62;
+    color: var(--text-body);
+  }
+
+  /* ---------- Other programs ---------- */
+  .other-grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-4);
+    margin-block-start: var(--s-6);
+  }
+
+  @media (min-width: 780px) {
+    .other-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .other-card {
+    display: grid;
+    gap: 2px;
+    padding: var(--s-5);
+    border: 1px solid var(--line-cream);
+    border-radius: var(--r-sm);
+    color: var(--text-strong);
+    transition: border-color 260ms var(--ease), background-color 260ms var(--ease);
+  }
+
+  .other-card:hover {
+    border-color: var(--gold);
+    background: var(--paper);
+  }
+
+  .other-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--gold-deep);
+  }
+
+  .other-label {
+    margin-block-start: var(--s-2);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .other-kicker {
+    font-size: var(--text-sm);
+    color: var(--text-body);
+  }
+
+  .other-arrow {
+    margin-block-start: var(--s-3);
+    color: var(--gold-deep);
+  }
+</style>

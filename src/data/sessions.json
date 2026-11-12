@@ -1,0 +1,42 @@
+[
+  {
+    "category": "Webinar",
+    "title": "After 12th Commerce: which degree actually fits you?",
+    "format": "Live online, group",
+    "length": "45 min",
+    "image": "/images/sessions/session-01.webp",
+    "alt": "An open notebook of handwritten accounts and a calculator on a lamp-lit desk"
+  },
+  {
+    "category": "Workshop",
+    "title": "Choosing between BCA and B.Sc IT",
+    "format": "Small group, screens shared",
+    "length": "60 min",
+    "image": "/images/sessions/session-02.webp",
+    "alt": "Two laptops on a desk, one showing code and the other a network diagram"
+  },
+  {
+    "category": "Admissions",
+    "title": "How distance admissions work, step by step",
+    "format": "Live online, group",
+    "length": "40 min",
+    "image": "/images/sessions/session-03.webp",
+    "alt": "A hand filling in a distance admissions form beside a laptop and a mug"
+  },
+  {
+    "category": "Webinar",
+    "title": "Career paths after Arts & Humanities",
+    "format": "Live online, group",
+    "length": "45 min",
+    "image": "/images/sessions/session-04.webp",
+    "alt": "A stack of cloth-bound books beside an open sketchbook and a fountain pen"
+  },
+  {
+    "category": "Workshop",
+    "title": "Building a study routine without a classroom",
+    "format": "Small group, with a counsellor",
+    "length": "60 min",
+    "image": "/images/sessions/session-05.webp",
+    "alt": "An open planner, headphones and a mug on a wooden desk under a warm lamp"
+  }
+]

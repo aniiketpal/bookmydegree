@@ -1,0 +1,269 @@
+[
+  {
+    "num": "01",
+    "slug": "commerce",
+    "label": "Commerce",
+    "kicker": "B.Com · BBA · M.Com",
+    "title": "Commerce & accounting",
+    "blurb": "Degrees built around accounting, finance and business law — the most common starting point for students who want a recognisable commerce qualification.",
+    "note": "3 or 4 years",
+    "lead": "Accounting, finance and business law — the route most students take when they want a qualification that employers already recognise, without giving up three years of income.",
+    "intro": "Commerce is the widest-used undergraduate route in India, and the one with the most near-identical variants: B.Com general, B.Com honours, BBA, and the professional exams (CA, CS, CMA) that run alongside a degree rather than replacing it. The differences that matter are how much accounting depth you get, whether the program feeds a master's, and whether you can realistically sit professional papers at the same time. That is the conversation we start with.",
+    "courses": [
+      {
+        "name": "B.Com (General)",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "The default commerce degree: accounting, business law, economics and taxation. Keeps the most doors open and is the easiest to complete while working."
+      },
+      {
+        "name": "B.Com (Honours)",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "More accounting and finance depth than the general route. A better base if you are aiming at M.Com, an MBA later, or professional papers."
+      },
+      {
+        "name": "BBA",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "Management-leaning rather than ledger-leaning. Suits students who want operations, marketing or running a family business."
+      },
+      {
+        "name": "Degree plus CA / CS / CMA Foundation",
+        "type": "Professional exams alongside a degree",
+        "duration": "3 to 5 years",
+        "fits": "The degree keeps a recognised qualification in hand while you clear professional papers. Realistically heavier than either on its own — plan the study hours first."
+      },
+      {
+        "name": "M.Com",
+        "type": "Master's degree",
+        "duration": "2 years",
+        "fits": "For teaching, research, or moving from bookkeeping into finance roles. Usually needs a commerce or related bachelor's."
+      },
+      {
+        "name": "Diploma in accounting, Tally or GST practice",
+        "type": "Diploma",
+        "duration": "6 to 12 months",
+        "fits": "A skills add-on for people already working who need practical filing and bookkeeping, not another degree."
+      }
+    ],
+    "careers": [
+      { "role": "Accounts assistant or executive", "detail": "Day-to-day books, reconciliations, vendor payments and month-end support." },
+      { "role": "Taxation and GST practice", "detail": "Return filing and compliance for small businesses, often alongside a senior practitioner at first." },
+      { "role": "Banking operations", "detail": "Branch operations, KYC, loan processing and customer service in public or private banks." },
+      { "role": "Audit support", "detail": "Assisting statutory and internal audits — documentation, sampling and query follow-up." },
+      { "role": "Entry-level financial analyst", "detail": "MIS reports, spreadsheet models and budgeting support in a finance team." },
+      { "role": "Business development", "detail": "For commerce graduates who would rather sell than reconcile — same knowledge, different day." }
+    ],
+    "helps": [
+      { "title": "We look at your marks and your maths comfort", "body": "Honours, professional exams and M.Com all assume a level of comfort with numbers. If that is shaky, we say so before you enrol rather than after." },
+      { "title": "We check the paperwork for the route you pick", "body": "Documents, eligibility, and what the institution actually asks for at admission — gathered once, correctly." },
+      { "title": "We submit it and hand you the trail", "body": "You get the application reference and a written summary of what happens next. The admission decision and the degree are the institution's." }
+    ],
+    "faqs": [
+      { "q": "Is a distance B.Com treated the same as a regular one?", "a": "For most private-sector jobs and for further study, a recognised distance degree is accepted, but some employers and some competitive exams state their own conditions. We tell you what to check rather than promise equivalence." },
+      { "q": "Can I do CA along with a distance B.Com?", "a": "People do, and the degree keeps a qualification in hand while you attempt papers. It is a heavy load — we will be straight with you about whether your week can carry it." },
+      { "q": "Do you arrange the degree?", "a": "No. We help you choose a program, prepare the application and submit it to the institution. Admission is theirs to grant and the degree is theirs to award." }
+    ]
+  },
+  {
+    "num": "02",
+    "slug": "management",
+    "label": "Management",
+    "kicker": "BBA · MBA · PGDM",
+    "title": "Management studies",
+    "blurb": "Business management programs for students heading toward operations, marketing or running something of their own.",
+    "note": "2 to 4 years",
+    "lead": "For students heading toward operations, marketing, people or their own business — where what you can do matters more than the letters after your name.",
+    "intro": "Management programs range from a three-year BBA to a two-year MBA, and the honest differences between them are about entry requirements and what employers will count. A PGDM is an institution's own diploma, not a university degree — that distinction matters in government jobs and higher study, and it is the first thing we check with you.",
+    "courses": [
+      {
+        "name": "BBA",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "The standard management start for students straight out of 12th. Broad coverage of marketing, finance, operations and HR."
+      },
+      {
+        "name": "BMS",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "Similar ground to BBA with a more analytical bent, depending on the institution offering it."
+      },
+      {
+        "name": "MBA",
+        "type": "Master's degree",
+        "duration": "2 years",
+        "fits": "For people with a bachelor's and a few years of work behind them. Most institutions expect an entrance score and some expect work experience."
+      },
+      {
+        "name": "PGDM",
+        "type": "Institution diploma",
+        "duration": "1 to 2 years",
+        "fits": "Industry-facing and often well taught, but it is a diploma, not a degree. Worth it for a private-sector career, weaker for government exams — we say which is which."
+      },
+      {
+        "name": "Diploma in retail, hospitality or supply chain",
+        "type": "Diploma",
+        "duration": "6 to 12 months",
+        "fits": "A fast skills route for someone already in a job who needs a specific operational credential."
+      },
+      {
+        "name": "Certificate in digital marketing or operations",
+        "type": "Short course",
+        "duration": "2 to 6 months",
+        "fits": "Adds a practical skill to an existing degree. Not a substitute for one."
+      }
+    ],
+    "careers": [
+      { "role": "Operations coordinator", "detail": "Keeping schedules, vendors and service levels aligned in a growing team." },
+      { "role": "Human resources and recruitment", "detail": "Hiring coordination, onboarding and people operations — a common first role for management graduates." },
+      { "role": "Sales and account management", "detail": "Owning a set of clients or a territory, with targets and relationship work." },
+      { "role": "Retail store management", "detail": "Staffing, stock, margins and daily targets — often the fastest route to managing people." },
+      { "role": "Supply chain and logistics", "detail": "Dispatch planning, inventory control and vendor coordination." },
+      { "role": "Running your own business", "detail": "For family businesses and first-time founders, the useful parts are costing, hiring and cash flow." }
+    ],
+    "helps": [
+      { "title": "We separate degrees from diplomas", "body": "MBA and PGDM are not the same credential. If you plan to sit a government exam or go on to a PhD, that difference decides the choice." },
+      { "title": "We match the level to your experience", "body": "A fresh graduate and someone with five years of work need different programs, even inside the same subject." },
+      { "title": "We handle the application, not the outcome", "body": "Forms, documents and submission are ours to chase. Selection and the award of the qualification remain the institution's." }
+    ],
+    "faqs": [
+      { "q": "Do I need work experience for an MBA?", "a": "Many programs prefer it and some require it, but plenty admit strong fresh graduates. We check the current requirement for the specific program instead of assuming." },
+      { "q": "Is a PGDM as good as an MBA?", "a": "For private-sector hiring, often yes — they are judged on the institution and the placements. For government jobs and higher study, a PGDM is a diploma and some routes will not accept it. That is the trade-off to decide first." },
+      { "q": "Can I study while working full time?", "a": "That is the usual case for our students. It means choosing a program with recorded sessions and exam centres you can actually reach — we check the second part before you commit." }
+    ]
+  },
+  {
+    "num": "03",
+    "slug": "computing",
+    "label": "Computing",
+    "kicker": "BCA · B.Sc IT · MCA",
+    "title": "Computing & IT",
+    "blurb": "Computer applications and IT degrees for students who want a technical route without a full-time campus commitment.",
+    "note": "3 years",
+    "lead": "Computer applications and IT degrees for students who want a technical career without a full-time campus commitment — with the caveat that in this field, what you build counts more than the degree.",
+    "intro": "A computing degree gets you past the screening filter; projects and practice get you hired. The choice between BCA and B.Sc IT is smaller than it looks, but MCA entry rules and maths requirements differ by institution, and those decide whether a program is actually open to you. We check eligibility before we talk about anything else.",
+    "courses": [
+      {
+        "name": "BCA",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "The most common route for students from any stream who want software and applications work. Some institutions ask for maths at 10+2 — worth confirming early."
+      },
+      {
+        "name": "B.Sc IT / Computer Science",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "Usually more theoretical than BCA, with a science-leaning syllabus. A better base if a master's is likely."
+      },
+      {
+        "name": "MCA",
+        "type": "Master's degree",
+        "duration": "2 years",
+        "fits": "For graduates who want to move into software proper. Entry rules vary a lot, including maths requirements and whether a BCA is accepted." },
+      {
+        "name": "B.Sc Data Science or AI",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "A newer route, offered by a smaller set of institutions. Check the syllabus rather than the title — the names vary more than the content."
+      },
+      {
+        "name": "PG Diploma in full-stack or data analytics",
+        "type": "Diploma",
+        "duration": "6 to 12 months",
+        "fits": "A practical add-on for someone with any degree who needs portfolio work, not another three years."
+      },
+      {
+        "name": "Certificate in cloud, QA or testing",
+        "type": "Short course",
+        "duration": "3 to 6 months",
+        "fits": "Useful alongside a degree or a job. On its own it rarely replaces one for screening."
+      }
+    ],
+    "careers": [
+      { "role": "Junior developer", "detail": "Building and maintaining features in a team, usually with a senior reviewing your work." },
+      { "role": "QA or test engineer", "detail": "Manual and automated testing — a common and less competitive entry point into product teams." },
+      { "role": "IT support and operations", "detail": "Desktops, networks and user support inside a company. Steady work, clear progression." },
+      { "role": "Data analyst (entry)", "detail": "SQL, spreadsheets and dashboards for a business team rather than engineering." },
+      { "role": "Cloud or DevOps associate", "detail": "Deployments, monitoring and basic infrastructure, usually after some support experience." },
+      { "role": "Technical writer", "detail": "Documentation and help content — a good fit for people who write clearly and understand systems." }
+    ],
+    "helps": [
+      { "title": "We check eligibility first", "body": "Maths requirements, stream restrictions and MCA entry rules vary by institution. Confirming those before you enrol avoids a wasted year." },
+      { "title": "We are honest about what a degree does here", "body": "It gets you through screening. Projects, internships and a portfolio get you hired, and we say that plainly rather than selling the certificate." },
+      { "title": "We keep the paperwork moving", "body": "Application, documents, submission and the reference number. Admission and the degree stay with the institution." }
+    ],
+    "faqs": [
+      { "q": "BCA or B.Sc IT — which is better?", "a": "For most software jobs the difference is smaller than the internet suggests: both are recognised three-year degrees. BCA is more application-focused and easier to enter from a non-science stream; B.Sc IT leans theoretical and suits a master's later." },
+      { "q": "Do I need maths for a computing degree?", "a": "Often yes at 10+2 level, and MCA programs frequently require it too. This is exactly the sort of rule that changes between institutions, so we confirm it for the specific program before you apply." },
+      { "q": "Can I get a job with only a distance degree?", "a": "Yes, but the degree is the screening step, not the differentiator. Hiring managers ask what you have built. Plan for projects or an internship alongside the coursework." }
+    ]
+  },
+  {
+    "num": "04",
+    "slug": "arts",
+    "label": "Arts & Humanities",
+    "kicker": "BA · MA · Psychology",
+    "title": "Arts & humanities",
+    "blurb": "Languages, history, psychology and social science — the widest set of options, and the one that most needs a plan.",
+    "note": "3 years",
+    "lead": "Languages, history, psychology and social science — the widest set of options in the country, and the one where a plan matters most, because the degree alone will not tell you what to do next.",
+    "intro": "An arts degree is the most flexible qualification in India and the easiest to drift through. The subjects you pick, the writing you produce and the exams you prepare for alongside it decide the outcome far more than the degree name. That flexibility is the point — and the reason this page is about choosing a direction, not just a course.",
+    "courses": [
+      {
+        "name": "BA (General)",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "Three subjects, broad coverage. Good when you are not ready to narrow down, or when you are preparing for competitive exams alongside."
+      },
+      {
+        "name": "BA (Honours) — English, History, Psychology, Political Science",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "One subject in depth. The better base for a master's, teaching, or research."
+      },
+      {
+        "name": "MA",
+        "type": "Master's degree",
+        "duration": "2 years",
+        "fits": "For teaching, research or a subject-specialist role. Usually needs the matching bachelor's."
+      },
+      {
+        "name": "BSW (Social Work)",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "Fieldwork-based and directly employable in the social sector. A different kind of degree from a general BA."
+      },
+      {
+        "name": "BA in Journalism and Mass Communication",
+        "type": "Bachelor's degree",
+        "duration": "3 years",
+        "fits": "For media, content and communications work. Portfolio matters as much as the degree."
+      },
+      {
+        "name": "Diploma in a language, translation or library science",
+        "type": "Diploma",
+        "duration": "6 months to 1 year",
+        "fits": "A specific skill layered onto an arts degree — the fastest way to make a general degree concrete."
+      }
+    ],
+    "careers": [
+      { "role": "Content writer or editor", "detail": "Writing and editing for brands, publishers and publications. Portfolio first, degree second." },
+      { "role": "Teaching", "detail": "School teaching needs a B.Ed after your degree; higher education needs a master's and usually a qualifying exam." },
+      { "role": "Civil services preparation", "detail": "Arts subjects overlap heavily with the general studies syllabus — a common and legitimate reason to choose them." },
+      { "role": "Human resources and people operations", "detail": "Psychology and sociology graduates move into hiring, training and employee experience." },
+      { "role": "Social work and the development sector", "detail": "NGOs, foundations and government programs, especially with a BSW or MSW." },
+      { "role": "Translation and localisation", "detail": "Language pairs, subtitling and content localisation — steady demand and easy to freelance." }
+    ],
+    "helps": [
+      { "title": "We start from what you want to do", "body": "Not from the subject list. If the plan is civil services, teaching or media, the degree choice follows from that." },
+      { "title": "We name the follow-on step early", "body": "B.Ed, a master's, a language diploma or an exam — arts degrees usually need one, and knowing which changes the program you pick." },
+      { "title": "We handle admission, you keep the direction", "body": "Documents, application and submission are ours. The institution decides admission and awards the degree." }
+    ],
+    "faqs": [
+      { "q": "Is an arts degree a waste of three years?", "a": "Only if nothing is built around it. Students who use it to prepare for exams, write seriously or add a language or teaching qualification do fine. Students who coast do not — that is true of most degrees." },
+      { "q": "Can I prepare for civil services while studying?", "a": "Yes, and the overlap is real. It is also the single most common plan we hear, so we will ask what happens if the exam takes longer than expected — a fallback qualification such as B.Ed or a language diploma is worth having." },
+      { "q": "Do you help with admission or with the exam?", "a": "Admission support only. We help you choose the program, prepare the application and submit it. Exam coaching is not something we do, and we will not pretend otherwise." }
+    ]
+  }
+]

@@ -1,0 +1,398 @@
+---
+/**
+ * CounsellingForm — booking a career guidance conversation.
+ * Deliberately different from the program inquiry form: it asks about
+ * stage and decision, not about a program of interest.
+ *
+ * Replace the two placeholder numbers when the real ones are ready.
+ */
+const WHATSAPP_NUMBER = '919211657613';
+const PHONE_NUMBER = '+919211657613';
+---
+
+<form
+  class="cform"
+  id="counselling-form"
+  novalidate
+  aria-label="Book a career counselling call"
+  data-whatsapp={WHATSAPP_NUMBER}
+>
+  <div class="cform-row">
+    <div class="field">
+      <label for="c-name">Your name</label>
+      <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Rohan Mehta" required aria-required="true" />
+      <span class="err" id="err-c-name" aria-live="polite"></span>
+    </div>
+
+    <div class="field">
+      <label for="c-phone">Phone or WhatsApp number</label>
+      <input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="98XXXXXXXX" required aria-required="true" />
+      <span class="err" id="err-c-phone" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="c-email">Email <span class="opt">optional</span></label>
+    <input id="c-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" />
+    <span class="err" id="err-c-email" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="c-stage">Where are you right now?</label>
+    <select id="c-stage" name="stage" required aria-required="true">
+      <option value="" disabled selected>Select one</option>
+      <option value="after-12">Finishing or finished 12th</option>
+      <option value="in-college">Currently in college</option>
+      <option value="graduated">Graduated, deciding what next</option>
+      <option value="working">Working, want a qualification</option>
+      <option value="other">Something else</option>
+    </select>
+    <span class="err" id="err-c-stage" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="c-deciding">What are you trying to decide?</label>
+    <textarea
+      id="c-deciding"
+      name="deciding"
+      rows="3"
+      placeholder="Which degree, which stream, whether distance learning suits me, whether my marks are enough…"
+      required
+      aria-required="true"
+    ></textarea>
+    <span class="err" id="err-c-deciding" aria-live="polite"></span>
+  </div>
+
+  <div class="field">
+    <label for="c-window">When is a good time to call? <span class="opt">optional</span></label>
+    <select id="c-window" name="window">
+      <option value="" selected>Any time</option>
+      <option value="morning">Morning, 10am – 1pm</option>
+      <option value="afternoon">Afternoon, 1pm – 4pm</option>
+      <option value="evening">Evening, 4pm – 7pm</option>
+      <option value="weekend">Weekend</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary submit" type="submit">
+    Book my counselling call
+    <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <p class="form-note">
+    The first call is free. We'll talk through where you are and what makes
+    sense next — no program pushed on you.
+  </p>
+</form>
+
+<div class="cthankyou" id="c-thankyou" hidden aria-live="polite" role="status">
+  <div class="cthankyou-icon" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M7.5 12.4l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h3>Your counselling request is in.</h3>
+  <p class="cthankyou-lead">
+    We'll confirm a time on the number you gave. If it's easier, start the
+    conversation now:
+  </p>
+
+  <p class="mail-note" id="c-mail-note" hidden>
+    We couldn't email this to our team automatically. Continue on WhatsApp so
+    nothing is missed.
+  </p>
+
+  <div class="cthankyou-actions">
+    <a class="btn btn-primary" id="c-wa" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.84c0 1.94.56 3.75 1.53 5.28L2 22l5.02-1.68a9.8 9.8 0 0 0 5.02 1.38h.01c5.44 0 9.84-4.4 9.84-9.84S17.48 2 12.04 2Zm5.76 13.9c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.02.15-3.44-.9-2.9-1.28-4.7-4.3-4.84-4.5-.14-.2-1.13-1.5-1.13-2.87 0-1.36.71-2.03.96-2.31.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.23.55.79 1.9.86 2.04.07.14.11.3.02.48-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.14-.29.29-.12.57.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.32 1.44.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.23.64-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.7-.17 1.38Z" />
+      </svg>
+      Continue on WhatsApp
+    </a>
+
+    <a class="btn btn-ghost btn-ghost--dark" id="c-call" href={`tel:${PHONE_NUMBER}`}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6.6 3.5h2.2l1.6 4-1.9 1.4a12.5 12.5 0 0 0 6 6l1.4-1.9 4 1.6v2.2a2.1 2.1 0 0 1-2.3 2.1A16.8 16.8 0 0 1 4.5 5.8 2.1 2.1 0 0 1 6.6 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      Call now
+    </a>
+  </div>
+
+  <p class="cthankyou-back">
+    While you wait — <a href="/#programs">see the programs</a> we guide
+    students into.
+  </p>
+</div>
+
+<script>
+  (function () {
+    const form = document.getElementById('counselling-form') as HTMLFormElement | null;
+    const thankyou = document.getElementById('c-thankyou');
+    if (!form || !thankyou) return;
+
+    const number = form.getAttribute('data-whatsapp') || '';
+
+    const setError = (id: string, msg: string) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = msg;
+    };
+
+    const ids = ['err-c-name', 'err-c-phone', 'err-c-email', 'err-c-stage', 'err-c-deciding'];
+    const clear = () => ids.forEach((id) => setError(id, ''));
+    const validPhone = (v: string) => v.replace(/[\s\-()+]/g, '').length >= 7;
+    const validEmail = (v: string) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+    /* Posts to the Worker, which emails the request to the team inbox.
+       Resolves false on any failure so the thank-you can still appear. */
+    async function postRequest(payload: Record<string, string>) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 9000);
+      try {
+        const res = await fetch('/api/inquire', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+        return res.ok;
+      } catch {
+        return false;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clear();
+
+      const value = (name: string) =>
+        (form.querySelector(`[name="${name}"]`) as HTMLInputElement | null)?.value.trim() ?? '';
+
+      const name = value('name');
+      const phone = value('phone');
+      const email = value('email');
+      const stage = value('stage');
+      const deciding = value('deciding');
+      let ok = true;
+
+      if (name.length < 2) {
+        setError('err-c-name', 'Please add your name.');
+        ok = false;
+      }
+      if (!validPhone(phone)) {
+        setError('err-c-phone', 'Please add a valid phone or WhatsApp number.');
+        ok = false;
+      }
+      if (!stage) {
+        setError('err-c-stage', 'Pick the one that fits best.');
+        ok = false;
+      }
+      if (deciding.length < 8) {
+        setError('err-c-deciding', 'A sentence is enough — what are you weighing up?');
+        ok = false;
+      }
+      if (!validEmail(email)) {
+        setError('err-c-email', 'That email does not look right.');
+        ok = false;
+      }
+
+      if (!ok) {
+        (form.querySelector('input, select, textarea') as HTMLElement | null)?.focus();
+        return;
+      }
+
+      const stageLabel =
+        (form.querySelector('[name="stage"] option:checked') as HTMLOptionElement | null)
+          ?.textContent?.trim() || '';
+
+      const prefill = encodeURIComponent(
+        `Hi, I'm ${name}. I'd like to book a counselling call. I'm at: ${stageLabel}. ${deciding}`
+      );
+
+      const wa = document.getElementById('c-wa');
+      if (wa) wa.setAttribute('href', `https://wa.me/${number}?text=${prefill}`);
+
+      const preferredLabel =
+        (form.querySelector('[name="window"] option:checked') as HTMLOptionElement | null)
+          ?.textContent?.trim() || 'Any time';
+
+      const submitBtn = form.querySelector('.submit') as HTMLButtonElement | null;
+      const mailNote = document.getElementById('c-mail-note');
+      if (submitBtn) submitBtn.setAttribute('aria-busy', 'true');
+
+      const delivered = await postRequest({
+        formType: 'career-counselling',
+        name,
+        phone,
+        email,
+        stage: stageLabel,
+        deciding,
+        preferred: preferredLabel,
+        page: location.pathname,
+      });
+
+      if (submitBtn) submitBtn.removeAttribute('aria-busy');
+      if (mailNote) mailNote.hidden = delivered;
+
+      form.hidden = true;
+      thankyou.hidden = false;
+      thankyou.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<style>
+  .cform {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cform-row {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 560px) {
+    .cform-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .field {
+    display: grid;
+    gap: 7px;
+  }
+
+  .field label {
+    font-size: 0.845rem;
+    font-weight: 600;
+    letter-spacing: -0.002em;
+    color: var(--text-strong);
+  }
+
+  .opt {
+    font-weight: 400;
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    margin-left: 4px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(28, 23, 16, 0.2);
+    background: var(--paper);
+    color: var(--text-strong);
+    font-size: 0.955rem;
+    transition: border-color var(--fast), box-shadow var(--fast), background var(--fast);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 84px;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--text-faint);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px rgba(141, 95, 30, 0.16);
+  }
+
+  .err {
+    color: #a8342a;
+    font-size: 0.815rem;
+    line-height: 1.3;
+  }
+
+  .err:empty {
+    display: none;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .form-note {
+    font-size: 0.845rem;
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+
+  /* ---------- Thank-you ---------- */
+  .cthankyou {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+
+  .cthankyou-icon {
+    color: var(--gold-deep);
+  }
+
+  .cthankyou h3 {
+    font-size: 1.32rem;
+  }
+
+  .cthankyou-lead {
+    font-size: 0.945rem;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .mail-note {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #8a3a2a;
+  }
+
+  .cthankyou-actions {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .cthankyou-actions .btn {
+    width: 100%;
+  }
+
+  @media (min-width: 520px) {
+    .cthankyou-actions {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .cthankyou-back {
+    font-size: 0.875rem;
+    color: var(--text-body);
+  }
+
+  .cthankyou-back a {
+    color: var(--text-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(168, 129, 58, 0.5);
+  }
+
+  .cthankyou-back a:hover {
+    color: var(--gold-deep);
+  }
+</style>

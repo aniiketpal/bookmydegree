@@ -1,0 +1,417 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CounsellingForm from '../components/CounsellingForm.astro';
+
+import guidanceWriting from '../assets/photos/guidance-writing.jpg';
+
+const title = 'Career Counselling — BookMyDegree';
+const description =
+  'A free 30-minute career counselling call for students in India. Work out which degree, stream or qualification fits, and leave with written next steps.';
+
+const faqs = [
+  {
+    q: 'Is the call really free?',
+    a: 'Yes. The first call costs nothing and there is no obligation to enrol in anything. If we think distance learning is the wrong route for you, we will say that on the call.',
+  },
+  {
+    q: 'Who will I actually speak to?',
+    a: 'A counsellor who works on these programs day to day — not a call-centre script. If your question needs the institution’s own answer, we tell you that instead of guessing.',
+  },
+  {
+    q: 'What if I have no idea what to study?',
+    a: 'That is the most common reason people call. We start from what you enjoy, what you have already studied and what you want to be able to do, then narrow down from there.',
+  },
+  {
+    q: 'Do you guarantee admission?',
+    a: 'No, and nobody honestly can. We help you pick a program that fits and prepare a correct application. Admission and the degree are decided and awarded by the institution.',
+  },
+];
+
+const arrow = `<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+
+<BaseLayout {title} {description} current="counselling">
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Career counselling</p>
+        <h1>One conversation, then a plan you can actually follow.</h1>
+        <p class="page-lead">
+          A free 30-minute call for students who are stuck: which degree, which
+          stream, whether distance learning even makes sense for them. We
+          listen first, then help you narrow it down.
+        </p>
+
+        <div class="page-actions">
+          <a class="pill pill--gold" href="#book">
+            Book a free call
+            <span class="pill-arrow">
+              <Fragment set:html={arrow} />
+              <Fragment set:html={arrow} />
+            </span>
+          </a>
+          <a class="btn btn-outline" href="#what">What happens on the call</a>
+        </div>
+
+        <ul class="page-facts" role="list">
+          <li><span class="n">30</span><span class="t">minutes, roughly</span></li>
+          <li><span class="n">1:1</span><span class="t">with a counsellor</span></li>
+          <li><span class="n">Free</span><span class="t">first conversation</span></li>
+          <li><span class="n">0</span><span class="t">degrees awarded by us</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= WHAT HAPPENS ================= -->
+    <section id="what" class="ground-cream">
+      <div class="container">
+        <div class="section-head section-head--dark reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>What actually happens on the call</h2>
+          <p class="lead-dark">
+            No presentation, no pressure. Three things, in this order.
+          </p>
+        </div>
+
+        <ol class="step-grid reveal-group" data-reveal-group>
+          <li>
+            <span class="step-num">01</span>
+            <h3>We ask about you</h3>
+            <p>
+              What you’ve studied, your marks, what you enjoy, whether you’re
+              working, and what you want a qualification to do for you.
+            </p>
+          </li>
+          <li>
+            <span class="step-num">02</span>
+            <h3>We narrow the options</h3>
+            <p>
+              Two or three routes that genuinely fit — including whether 3 or 4
+              years is realistic, and whether a diploma gets you there faster.
+            </p>
+          </li>
+          <li>
+            <span class="step-num">03</span>
+            <h3>You leave with next steps</h3>
+            <p>
+              What to check, what documents to gather, what to avoid. In
+              writing, so you can think about it without us on the phone.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= WHO IT'S FOR ================= -->
+    <section aria-labelledby="who-title">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Who it’s for</p>
+          <h2 id="who-title">Most people who call are in one of these places.</h2>
+
+          <ul class="num-list">
+            <li>
+              <span class="n">i</span>
+              <div>
+                <span class="t">Just finished 12th, no clear plan</span>
+                <span class="s">Marks are fine but the next step isn’t obvious, and everyone is giving different advice.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">ii</span>
+              <div>
+                <span class="t">In a course that doesn’t fit</span>
+                <span class="s">You want to change direction without losing the years you’ve already put in.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">iii</span>
+              <div>
+                <span class="t">Working, and need the qualification</span>
+                <span class="s">You can’t stop working for three years, but the role you want needs a degree on paper.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">iv</span>
+              <div>
+                <span class="t">Graduated, unsure what’s next</span>
+                <span class="s">Whether a postgraduate degree helps, or whether it just delays the decision again.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="split-figure reveal d2">
+          <Image
+            src={guidanceWriting}
+            alt="A student drawing a line with a ruler while writing in a spiral notebook"
+            width={1100}
+            format="webp"
+            quality={74}
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= BOOK ================= -->
+    <section id="book" class="inquire-section" aria-labelledby="book-title">
+      <div class="container inquire-grid">
+        <div class="inquire-copy reveal">
+          <p class="eyebrow">Book a call</p>
+          <h2 id="book-title">Tell us where you are.</h2>
+
+          <p>
+            This is the counselling form, not the program enquiry form. It asks
+            about your situation so the call starts somewhere useful instead of
+            at the beginning.
+          </p>
+
+          <ul class="num-list">
+            <li>
+              <span class="n">i</span>
+              <div>
+                <span class="t">We reply the same day</span>
+                <span class="s">Usually within a few working hours.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">ii</span>
+              <div>
+                <span class="t">You pick the window</span>
+                <span class="s">Morning, afternoon, evening or weekend.</span>
+              </div>
+            </li>
+            <li>
+              <span class="n">iii</span>
+              <div>
+                <span class="t">Nothing is pushed</span>
+                <span class="s">If a program isn’t right for you, we say so.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-panel reveal d2">
+          <CounsellingForm />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="ground-cream" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <div class="reveal">
+          <p class="eyebrow">Questions</p>
+          <h2 id="faq-title">Before you book</h2>
+        </div>
+
+        <div class="faq-list reveal d1">
+          {faqs.map((f) => (
+            <details class="faq">
+              <summary>
+                {f.q}
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta">
+      <div class="container final-inner reveal">
+        <p class="eyebrow eyebrow--center">No plan yet? That’s fine</p>
+        <h2>Start with the call, not the course.</h2>
+        <p>
+          Thirty minutes is usually enough to turn “I don’t know what to do”
+          into two or three real options.
+        </p>
+        <div class="final-actions">
+          <a class="btn btn-primary" href="#book">Book a free call</a>
+          <a class="btn btn-ghost" href="/#programs">See programs first</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ---------- Page hero ---------- */
+  .page-hero {
+    position: relative;
+    padding-block: calc(var(--nav-h) + var(--nav-top) + clamp(64px, 8vw, 120px)) clamp(80px, 9vw, 128px);
+    overflow: hidden;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(50% 48% at 82% -6%, rgba(220, 179, 92, 0.14), transparent 64%),
+      radial-gradient(44% 40% at 4% 104%, rgba(80, 105, 200, 0.08), transparent 68%);
+    pointer-events: none;
+  }
+
+  .page-hero .container {
+    position: relative;
+  }
+
+  .page-hero h1 {
+    max-width: 20ch;
+    font-size: clamp(2.2rem, 4.6vw, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+
+  .page-lead {
+    max-width: 58ch;
+    margin-block-start: var(--s-5);
+    font-size: var(--text-md);
+    line-height: 1.64;
+    color: var(--text-body);
+  }
+
+  .page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-block-start: var(--s-6);
+  }
+
+  .page-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-7);
+    margin-block-start: var(--s-7);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .page-facts li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+  }
+
+  .page-facts .n {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-strong);
+  }
+
+  .page-facts .t {
+    font-size: var(--text-sm);
+    color: var(--text-body);
+  }
+
+  /* ---------- Steps on cream ---------- */
+  .section-head--dark p.lead-dark {
+    color: var(--text-body);
+  }
+
+  .step-grid {
+    list-style: none;
+    display: grid;
+    gap: var(--s-5);
+    counter-reset: step;
+  }
+
+  @media (min-width: 820px) {
+    .step-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-6);
+    }
+  }
+
+  .step-grid li {
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--line-cream);
+  }
+
+  .step-num {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--gold-deep);
+    margin-block-end: var(--s-3);
+  }
+
+  .step-grid h3 {
+    margin-block-end: var(--s-3);
+    font-size: var(--text-lg);
+  }
+
+  .step-grid p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap {
+    display: grid;
+    gap: clamp(32px, 4vw, 64px);
+  }
+
+  @media (min-width: 900px) {
+    .faq-wrap {
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+    }
+  }
+
+  .faq-list {
+    border-block-start: 1px solid var(--line-cream);
+  }
+
+  .faq {
+    border-block-end: 1px solid var(--line-cream);
+  }
+
+  .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-block: var(--s-5);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: -0.008em;
+    color: var(--text-strong);
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq summary svg {
+    flex: 0 0 auto;
+    color: var(--gold-deep);
+    transition: transform 300ms var(--expo);
+  }
+
+  .faq[open] summary svg {
+    transform: rotate(135deg);
+  }
+
+  .faq p {
+    max-width: 62ch;
+    padding-block-end: var(--s-5);
+    font-size: var(--text-base);
+    line-height: 1.62;
+    color: var(--text-body);
+  }
+</style>
