@@ -27,10 +27,26 @@ const wrap76 = (value) => (value.match(/.{1,76}/g) || []).join('\r\n');
 const headerValue = (value) =>
   /^[\x20-\x7e]*$/.test(value) ? value : `=?UTF-8?B?${base64(value)}?=`;
 
+export async function probeTargets(targets) {
+  const results = [];
+  for (const [hostname, port, tls] of targets) {
+    try {
+      const socket = connect({ hostname, port }, { secureTransport: tls ? 'on' : 'off' });
+      await socket.opened;
+      results.push(`${hostname}:${port}${tls ? ' tls' : ''} -> open`);
+      socket.close();
+    } catch (error) {
+      results.push(`${hostname}:${port}${tls ? ' tls' : ''} -> ${error && error.message}`);
+    }
+  }
+  return results;
+}
+
 function openConnection(host, port) {
   const socket = connect({ hostname: host, port }, { secureTransport: 'on' });
   const reader = socket.readable.getReader();
   const writer = socket.writable.getWriter();
+  const opened = socket.opened;
   let buffer = '';
 
   async function readLine(timeoutMs) {
@@ -84,7 +100,7 @@ function openConnection(host, port) {
     } catch {}
   }
 
-  return { expect, send, close };
+  return { expect, send, close, opened };
 }
 
 /**
@@ -101,12 +117,17 @@ export async function sendMail(env, { to, subject, html, text, replyTo }) {
 
   const domain = user.split('@')[1] || 'localhost';
   const connection = openConnection(host, port);
+  let step = `connect ${host}:${port}`;
 
   try {
+    await connection.opened;
+    step = 'greeting';
     await connection.expect('greeting', [220]);
+    step = 'EHLO';
     await connection.send(`EHLO ${domain}`);
     await connection.expect('EHLO', [250]);
 
+    step = 'AUTH LOGIN';
     await connection.send('AUTH LOGIN');
     await connection.expect('AUTH LOGIN', [334]);
     await connection.send(base64(user));
@@ -114,12 +135,15 @@ export async function sendMail(env, { to, subject, html, text, replyTo }) {
     await connection.send(base64(pass));
     await connection.expect('password', [235]);
 
+    step = 'MAIL FROM';
     await connection.send(`MAIL FROM:<${user}>`);
     await connection.expect('MAIL FROM', [250]);
 
+    step = 'RCPT TO';
     await connection.send(`RCPT TO:<${to}>`);
     await connection.expect('RCPT TO', [250, 251]);
 
+    step = 'DATA';
     await connection.send('DATA');
     await connection.expect('DATA', [354]);
 
@@ -136,15 +160,20 @@ export async function sendMail(env, { to, subject, html, text, replyTo }) {
     ];
     if (replyTo) headers.push(`Reply-To: <${replyTo}>`);
 
+    step = 'message body';
     const body = wrap76(base64(html || `<pre>${text || ''}</pre>`));
     await connection.send(headers.join('\r\n') + '\r\n\r\n' + body);
     await connection.send('.');
+    step = 'end of DATA';
     await connection.expect('end of DATA', [250]);
 
     await connection.send('QUIT');
     await connection.close();
   } catch (error) {
+    const detail = error && error.stack ? String(error.stack).split('\n').slice(0, 3).join(' | ') : String(error);
+    const wrapped = new Error(`[${step}] ${error && error.message ? error.message : detail}`);
+    wrapped.stack = `[${step}] ${detail}`;
     await connection.close();
-    throw error;
+    throw wrapped;
   }
 }

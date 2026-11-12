@@ -143,16 +143,31 @@ async function handleInquiry(request, env) {
 
   const text = `${heading}\n\n${rows.map(([label, value]) => `${label}: ${value}`).join('\n')}\n`;
 
+  const mail = {
+    to: env.MAIL_TO || 'info@bookmydegree.in',
+    subject: `${heading} — ${name}`,
+    html: renderHtml(heading, rows),
+    text,
+    replyTo: email || undefined,
+  };
+
   try {
-    await sendMail(env, {
-      to: env.MAIL_TO || 'info@bookmydegree.in',
-      subject: `${heading} — ${name}`,
-      html: renderHtml(heading, rows),
-      text,
-      replyTo: email || undefined,
-    });
+    if (env.EMAIL) {
+      // Deployed: Cloudflare hands the message to the recipient's mail server.
+      await env.EMAIL.send({
+        to: mail.to,
+        from: env.MAIL_FROM || 'noreply@bookmydegree.in',
+        subject: mail.subject,
+        html: mail.html,
+        text: mail.text,
+        replyTo: mail.replyTo,
+      });
+    } else {
+      // Local development: talk to the mailbox over SMTP directly.
+      await sendMail(env, mail);
+    }
   } catch (error) {
-    console.error('inquiry: SMTP send failed —', String(error).slice(0, 500));
+    console.error('inquiry: SMTP send failed —', String((error && error.stack) || error).slice(0, 700));
     const notConfigured = /credentials are not configured/.test(String(error));
     return json(notConfigured ? 503 : 502, {
       error: notConfigured ? 'mail_not_configured' : 'delivery_failed',
@@ -165,6 +180,12 @@ async function handleInquiry(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // One canonical host: www goes to the bare domain.
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
 
     if (url.pathname === '/api/inquire') {
       if (request.method !== 'POST') return json(405, { error: 'method_not_allowed' });

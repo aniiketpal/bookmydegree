@@ -9,7 +9,15 @@
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page"
   },
+  "routes": [
+    { "pattern": "bookmydegree.in", "custom_domain": true },
+    { "pattern": "www.bookmydegree.in", "custom_domain": true }
+  ],
+  "send_email": [
+    { "name": "EMAIL", "destination_address": "info@bookmydegree.in" }
+  ],
   "vars": {
+    "MAIL_FROM": "noreply@bookmydegree.in",
     "SMTP_HOST": "smtp.hostinger.com",
     "SMTP_PORT": "465",
     "SMTP_USER": "info@bookmydegree.in",
